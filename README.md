@@ -33,6 +33,12 @@ Set your Wifi SSID + Password as env variables
 * `export WIFI_SSID=foo`
 * `export WIFI_PASSWORD=bar`
 * `export OPENAI_API_KEY=bing`
+```bash
+export WIFI_SSID=xxxx
+export WIFI_PASSWORD=xxxx
+export OPENAI_API_KEY=bing
+```
+
 
 Build
 * `idf.py build`
@@ -46,3 +52,42 @@ If you built for `linux` you can run the binary directly
 See [build.yaml](.github/workflows/build.yaml) for a Docker command to do this all in one step.
 
 ## Usage
+
+
+## Steps:
+### Install protobuf-compiler
+```bash
+sudo apt update
+sudo apt install protobuf-compiler
+
+sudo apt install protobuf-c-compiler libprotobuf-c-dev
+
+
+protoc --version
+```
+
+
+### Install ESP-IDF
+Linux/macOS
+```bash
+mkdir -p ~/esp
+cd ~/esp
+git clone --recursive https://github.com/espressif/esp-idf.git
+cd esp-idf
+./install.sh
+
+. $HOME/esp/esp-idf/export.sh
+
+```
+
+### Build
+```bash
+idf.py set-target esp32s3
+idf.py menuconfig
+idf.py build
+sudo -E idf.py flash
+./build/src.elf
+```
+
+
+
